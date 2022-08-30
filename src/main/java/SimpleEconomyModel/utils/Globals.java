@@ -41,7 +41,7 @@ public class Globals extends GlobalState {
     @Input(name="Probability of being purchased")
     public double f = 0.0d;
 
-    @Input(name="Percentage chance of revival")
+    @Input(name="Revival Probability")
     public double phi = 0.1d;
     public double percentageWealthyHouseholds = 0.1;
     public int deposistsMultiplier = 2;
