@@ -18,7 +18,6 @@ public class SimpleEconomyModel extends AgentBasedModel<Globals> {
     @Override
     public void init() {
 
-        createDoubleAccumulator("inflation");
         createDoubleAccumulator("employment");
         createDoubleAccumulator("unemployment");
 

@@ -13,7 +13,6 @@ import java.util.*;
 
 public class Economy extends Agent<Globals> {
 
-    @Variable
     public double inflation;
     @Variable
     public double unemployment;
@@ -149,7 +148,6 @@ public class Economy extends Agent<Globals> {
             market.inflation = (market.averagePrice - market.previousAveragePrice) / market.previousAveragePrice;
             //System.out.println(market.inflation+2);
             market.inflation = (market.inflation / market.getGlobals().gamma_p) + 2;
-            market.getDoubleAccumulator("inflation").add(market.inflation);
         });
 
     }

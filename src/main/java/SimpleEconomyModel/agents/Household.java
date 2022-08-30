@@ -10,9 +10,7 @@ import simudyne.core.annotations.Variable;
 import java.util.HashMap;
 
 public class Household extends Agent<Globals> {
-    @Variable
     public int sector_skills;
-    @Variable
     public double productivity;
     public boolean rich;
     public double wealth;

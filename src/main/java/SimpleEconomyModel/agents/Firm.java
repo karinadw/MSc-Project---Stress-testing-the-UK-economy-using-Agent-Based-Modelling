@@ -15,20 +15,14 @@ import static java.lang.Double.NaN;
 
 public class Firm extends Agent<Globals> {
 
-    @Variable
     public int vacancies;
-    @Variable
     public double deposits;
-    @Variable
     public double profit;
-    @Variable
     public double wage;
     public long stock;
     public long inventory;
-    @Variable
     public double earnings;
     public int workers;
-    @Variable
     public int sizeOfCompany;
     public int sector;
     public double priceOfGoods;
@@ -637,7 +631,7 @@ public class Firm extends Agent<Globals> {
     public static Action<Firm> productionShock() {
         return Action.create(Firm.class, firm -> {
             if (firm.sector == firm.getGlobals().sectorShock){
-                firm.targetProduction = firm.targetProduction * firm.getGlobals().productionShock;
+                firm.targetProduction = firm.targetProduction * (1-firm.getGlobals().productionShock);
             }
         });
     }
