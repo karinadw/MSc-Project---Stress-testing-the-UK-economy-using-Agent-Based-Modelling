@@ -53,9 +53,6 @@ public class Firm extends Agent<Globals> {
     public static Action<Firm> SetVacancies() {
         return Action.create(Firm.class, firm -> {
             // set vacancies according to firm size
-            // TODO: check if logic makes sense -> check the numbers
-            // potential resources: https://www.statista.com/statistics/676671/employees-by-business-size-uk/
-            // Ive scaled it down because if not there are approx 25000 vacancies
             if (firm.isProductive) {
                 if (firm.sizeOfCompany == 0) {
                     firm.vacancies = (int) firm.getPrng().uniform(1, 5).sample();
@@ -68,6 +65,7 @@ public class Firm extends Agent<Globals> {
                 firm.vacancies = 0;
             }
             firm.getGlobals().totalVacancies += firm.vacancies;
+//            // for debugging purposes
 //            System.out.println("Firm " + firm.getID() + " is of size " + firm.sizeOfCompany + " and has " + firm.vacancies + " vacancies ");
 //            System.out.println("Total vacancies in the economy " + firm.getGlobals().totalVacancies);
         });
@@ -75,7 +73,6 @@ public class Firm extends Agent<Globals> {
 
     public static Action<Firm> SetWages() {
         return Action.create(Firm.class, firm -> {
-            // TODO: check this. Right now 50% of sales is the wage and the rest is profit
             double maxSales = firm.vacancies * firm.priceOfGoods * firm.getGlobals().productionConstant;
             firm.wage = maxSales / (firm.vacancies * 10);
         });
@@ -233,7 +230,9 @@ public class Firm extends Agent<Globals> {
                         }
                     }
                 }
-            } else {
+            }
+//          // everything below is for debugging purposes
+            else {
                 firm.stock = 0;
             }
 
@@ -248,7 +247,6 @@ public class Firm extends Agent<Globals> {
         });
     }
 
-    // TODO: sell the inventory first
     public static Action<Firm> sendSupplyAndDemand() {
         return Action.create(Firm.class, firm -> {
             // send information about the stock of the good it produces and the price of the good

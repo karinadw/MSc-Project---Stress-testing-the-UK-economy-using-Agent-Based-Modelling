@@ -122,8 +122,6 @@ public class Economy extends Agent<Globals> {
             market.numerator = 0;
             market.denominator = 0;
             if (market.priceOfGoodsDemanded.size() == 0){
-                //TODO: this is a temporary fix -> FIX IT
-                System.out.println("no goods demanded");
                 market.getLinks(Links.EconomyToFirm.class).send(Messages.AveragePrice.class, (m, l) -> {
 //                    System.out.println("sending an average price of: " + market.numerator/ market.denominator);
                     m.averagePrice = market.getPrng().uniform(0,1).sample();
@@ -303,8 +301,6 @@ public class Economy extends Agent<Globals> {
                         }).to(healthyFirmID);
 
                         // the indebted firm no longer has any debt
-                        // not too sure if I need to do this in this step
-                        // economy.send(Messages.NoDebt.class).to(indebtedFirmID);
                         economy.bailedOutFirmsMap.put(indebtedFirmID, new BailoutPackage(economy.healthyFirmAccountMap.get(healthyFirmID).price, economy.healthyFirmAccountMap.get(healthyFirmID).wage));
                     } else {
                         economy.deficit -= debt;

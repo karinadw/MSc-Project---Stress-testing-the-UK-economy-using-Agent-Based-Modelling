@@ -2,7 +2,6 @@ package SimpleEconomyModel.utils;
 
 public class BailoutPackage {
     public double price;
-
     public double wage;
 
     public BailoutPackage(double price, double wage) {

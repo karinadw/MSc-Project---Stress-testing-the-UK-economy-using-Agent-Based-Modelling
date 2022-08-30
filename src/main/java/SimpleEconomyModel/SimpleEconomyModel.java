@@ -137,8 +137,6 @@ public class SimpleEconomyModel extends AgentBasedModel<Globals> {
     public void step() {
         super.step();
 
-        System.out.println("Tick: " + getContext().getTick());
-
         // Initial settings that do not need to get repeated throughout
         if (getContext().getTick() == 0) {
 
@@ -195,12 +193,6 @@ public class SimpleEconomyModel extends AgentBasedModel<Globals> {
         // Firms produce their good according to the productivity of the firm, the number of workers and the size of the firm
         run(Firm.FirmsProduce());
 
-        // calculates the average price of products and sends it to the firms
-        // this is needed for the firm to update its strategy
-        // change in average price is used to calculate inflation
-
-
-
         // workers get paid the wage offered by their firm and investors get paid dividends
         run(Firm.payWorkers(), Household.receiveIncome());
 
@@ -237,8 +229,12 @@ public class SimpleEconomyModel extends AgentBasedModel<Globals> {
         // after households purchase, the update their consumption budget for each good
         run(Household.updateConsumptionBudget());
 
+        /////////////////////////////////////////////////////////////////////////////////////////////////
 
-        // TODO: re-write those functions that are same as Mark 0
+        // THE FUNCTIONS IN THIS SECTION HAVE BEEN TAKEN FROM MARK 0 USED BY THE EC FOR THE CRISIS PROJECT
+        // THE CODE WAS PROVIDED BY SDK ENGINEERS
+        // THE CODE HAS BEEN ADAPTED FOR THIS MODEL AND REFERENCED IN THE REPORT
+
         // Firm accounting
         // if firm can (earnings and profits are positive), it will pay out dividends to investor
         run(Firm.Accounting(), Household.getDividends());
@@ -255,6 +251,10 @@ public class SimpleEconomyModel extends AgentBasedModel<Globals> {
 
         //update the target production to meet the demand
         run(Firm.adjustPriceProduction());
+
+        // THIS ENDS THE SECTION THAT IS BASED ON MARK O
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////
 
         if (getContext().getTick() > 12) {
             run(Firm.productionShock());

@@ -33,7 +33,7 @@ public class GoodsMarket extends Agent<Globals> {
             if (goodMarket.hasMessageOfType(Messages.FirmSupply.class)) {
                 goodMarket.getMessagesOfType(Messages.FirmSupply.class).forEach(firmSupply -> {
                     if (firmSupply.output > 0) {
-                        System.out.println("receiving a supply of " + firmSupply.output + " from firm " + firmSupply.getSender() + " in good market " + goodMarket.goodTraded + " at a price of " + firmSupply.price);
+//                        System.out.println("receiving a supply of " + firmSupply.output + " from firm " + firmSupply.getSender() + " in good market " + goodMarket.goodTraded + " at a price of " + firmSupply.price);
                         goodMarket.firmsSupplyingGoods.add(new FirmSupplyInformation(firmSupply.getSender(), firmSupply.output, firmSupply.price));
                     }
                 });
@@ -124,9 +124,6 @@ public class GoodsMarket extends Agent<Globals> {
                                 demandInformation.bought = (int) finalQuantityAvailable1;
                             }).to(firmToBuyFrom.get().ID);
 
-//                            // updates list of bought items and its price
-//                            goodMarket.priceOfGoods.put((int) finalQuantityAvailable1, priceOfIntermediateGood);
-
                             // update the demanded quantity
                             quantityDemanded -= quantityAvailable;
 
@@ -197,8 +194,6 @@ public class GoodsMarket extends Agent<Globals> {
                             // this firm no longer has any available goods -> it's removed from the list of firms
                             goodMarket.firmsSupplyingGoods.remove(firmToPurchaseFrom.get());
 
-//                            System.out.println("Firm " + firmToPurchaseFrom.get().ID + " is sold out.");
-
                         } else if (quantityDemanded < quantityAvailable) {
                             goodMarket.send(Messages.HouseholdOrFirmWantsToPurchase.class, m -> {
                                 m.demand = quantityDemanded;
@@ -233,16 +228,4 @@ public class GoodsMarket extends Agent<Globals> {
         });
     }
 }
-
-//    public static Action<GoodsMarket> CalculateAveragePrice() {
-//        return Action.create(GoodsMarket.class, goodsMarket -> {
-//            goodsMarket.priceOfGoods.forEach((quantity, price) -> {
-//               goodsMarket.getLinks(Links.GoodsMarketToEconomy.class).send(Messages.SoldGoodsAndPrices.class, (msg, link) -> {
-//                  msg.price = price;
-//                  msg.quantitySold = quantity;
-//               });
-//            });
-//        });
-//    }
-//}
 
