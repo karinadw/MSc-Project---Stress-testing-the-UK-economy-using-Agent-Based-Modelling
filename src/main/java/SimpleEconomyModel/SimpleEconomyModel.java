@@ -76,7 +76,6 @@ public class SimpleEconomyModel extends AgentBasedModel<Globals> {
             // reference for number used for saving -> initial wealth: https://www.ons.gov.uk/peoplepopulationandcommunity/personalandhouseholdfinances/incomeandwealth/bulletins/distributionofindividualtotalwealthbycharacteristicingreatbritain/april2018tomarch2020
             household.budget = new HashMap<Integer, Double>();
 
-            // TODO: Check the variables here : percentage of rich households and percentage of exclusive goods
             if (householdNumber < (getGlobals().nbWorkers - Math.ceil(getGlobals().percentageWealthyHouseholds * getGlobals().nbWorkers))) {
                 // common individuals
                 household.rich = false;
